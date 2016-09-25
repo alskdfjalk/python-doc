@@ -55,7 +55,7 @@
     这个类型只有一个值。只有这个对象有这个值。这个对象通过内置的名字“None” 访问，它通常用来表示
     一个值不存在时的场景，比如，一个函数返回了一个没有明确返回指定的任何东西的值。它的 boolean 值是假（否）。
 
-    /*Notimplemented*/  这个实在看不懂
+    /*Notimplemented*/
 
     这个类型只有一个值。只有这个对象有这个值。这个对象通过内置的名字“NotImplemented”访问。
     数值方法和丰富的比较方法（Numeric methods and rich comparison methods）
@@ -95,3 +95,7 @@
 
     这个类型只有一个值。只有这个对象有这个值。这个对象通过 literal(本身？) ... 或者内置名字“Ellipsis”访问。
     BOOLEAN  为 true。
+
+    /*numbers.Number*/ 这句看起来太吃力了，已经不能集中注意力了，下期再会吧。
+
+    These are created by numeric literals and returned as results by arithmetic operators and arithmetic built-in functions. Numeric objects are immutable; once created their value never changes. Python numbers are of course strongly related to mathematical numbers, but subject to the limitations of numerical representation in computers.
