@@ -1,0 +1,44 @@
+* 数据模型
+** 对象、变量和类型
+     对象是 Py 中对数据的抽象，所有数据在 Py 中都是对象，或者和对象有关系。(In a sense, and in conformance to Von Neumann’s model of a “stored program computer,” code is also represented by objects.)
+
+     所有对象都有"identify"(不知道怎么翻译，身份？)，一个类型和一个值。对象创建之后便不能做修改；你可以认为它将对象地址保存在了内存中。
+     关键字“is” 操作符对比两个对象“身份”是否一致。
+     内置函数“id()”返回一个对象身份的整数值。
+
+     /*CPython implementation detail:*/ 对于 CPython，id(x)返回的是保存在内存中的地址。
+
+     一个对象类型决定了这个对象支持哪些操作并且定义了这个对象可能支持的类型。函数type()返回一个对象类型。
+     比如它的“身份”，对象类型同样不能修改。
+
+     某些对象的值是可以改变的。那些可以改变值的对象叫做“mutable”；那些不可变的值的对象叫做“immutable”。（......,
+     所以，“immutablility” 的值并不是绝对不能改变得，还有更多细节需要说明）一个对象的类型决定了它的可变性；对于“实例”来说，
+     数字、字符串、元祖是不可变的，列表、字典是可变的。
+
+     对象不能被明确销毁；当它们不可用时会被当做垃圾回收。处理过程允许延迟回收到垃圾集合或者把它们都删除掉——
+     it is a matter of implementation quality how garbage collection is implemented，as long as no objects are collected that are still reachable.
+
+     /*CPythong implementation detai：*/  CPython 目前使用引用计数机制延迟检查垃圾回收循环链表，这个链表中
+     的值多数都是很快就会被弃用（as soon as the become unreachable)，但是不能保证这个垃圾集合中没有循环引用。
+     查看 “[[https://docs.python.org/3/library/gc.html#module-gc][gc]]” 模块来查看更多信息以控制循环引用的垃圾集合。
+     其他版本的垃圾回收处理过程和 CPython 可能是不同的(Other implementations act differently and CPython may change。)。
+
+     注意这些使用的过程跟踪或者“调试区”（debugging facilities)中会让这些对象一直保留在正常使用的集合中。
+     同样要注意在‘try...except'声明中会保持对象存在（alive）。
+
+     有些对象会包含引用外在资源的引用，比如打开文件、或者  windows。它会在释放资源时资源已经是 freed，
+     但不能对其作出保证，这类型的对象提供了一个明确的释放外部资源的方式，通常是 “close()” 方法。
+     如果想让你的程序保持健壮性，强烈建议明确 close 这类对象。
+     “try...finally” 声明以及 “with” 声明提供了方便的方式去做这些事。
+
+     某些对象会包含其他引用；这些叫做容器。比如：元祖、列表和字典。这些引用可以是容器值的一部分。
+     大多数事例中，当我们在说“容器”的值得时候，我们默认认为这些是“values”，而不是容器对象的“身份”（identities）
+     总之，当我们在谈论到可变的容器时，只有默认会当做身份（identities）来解释。
+     所以呢，如果一个不可变容器（like a tuple）包含了一个可变对象的引用，如果这个可变对象改变了，那么这个值也会改变。
+
+     类型几乎可以影响所有对象的行为。甚至在某种意义上，对象身份的重要性也受到影响：对于可变对象类型，使用操作符
+     计算、得到一个新的值得时候，实际上会返回一个和其中一个对象相同的类型和值（用相同类型去计算，并且返回相同类型
+     的值），可与可变对象来说这是不允许的。比如，a = 1; b = 1, a and b 也许会也许不会引用同一个对象的值，
+     依赖执行方式
+     但是 c = []; d = []，c 和 d 会保证引用两个不同的、唯一的，新创建的空列表。(Note that c = d= [] 会将相同的对象赋值给 c 和 d)
+** 标准类型的层次结构
