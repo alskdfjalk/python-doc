@@ -1,7 +1,7 @@
 * The python language reference
   原文: https://docs.python.org/3/reference/index.html
 
-[[https://github.com/cj4777/python-doc/blob/master/data-model.org][下一页：数据类型]]
+[[https://github.com/cj4777/python-doc/blob/master/data-model.org][下一页：数据模型]]
 
 本参考手册描述了Python 的语法以及“核心语义"。很简练，但是会试图准确并且完整说明。
   语义不会包含内置对象类型、函数、以及模块，这些会包含在 [[https://docs.python.org/3/library/index.html#library-index][The Python Standard Library]]。
@@ -28,4 +28,4 @@
 *** 注解（略过）
     ......
 
-[[https://github.com/cj4777/python-doc/blob/master/data-model.org][下一页：数据类型]]
+[[https://github.com/cj4777/python-doc/blob/master/data-model.org][下一页：数据模型]]

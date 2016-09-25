@@ -42,3 +42,56 @@
      依赖执行方式
      但是 c = []; d = []，c 和 d 会保证引用两个不同的、唯一的，新创建的空列表。(Note that c = d= [] 会将相同的对象赋值给 c 和 d)
 ** 标准类型的层次结构
+   下面是一个 python 内置类型的列表。扩展模块（用 C、JAVA 或者其他语言，depending on the implementation）
+   可以定义额外类型。未来版本中的 Py 也许会加入类型的类型层次
+   （e.g., rational numbers, efficiently stored arrays of integers, etc.）
+   虽然这些通常是在标准库中提供了的。
+
+   下面的某些类型中的描述部分包含了一个“special sttributes”的段落，这些属性提供了“访问实现”（access to the implementation)
+   而通常不是用来使用的。这些定义可能会在未来修改。
+
+   /*None*/
+
+    这个类型只有一个值。只有这个对象有这个值。这个对象通过内置的名字“None” 访问，它通常用来表示
+    一个值不存在时的场景，比如，一个函数返回了一个没有明确返回指定的任何东西的值。它的 boolean 值是假（否）。
+
+    /*Notimplemented*/  这个实在看不懂
+
+    这个类型只有一个值。只有这个对象有这个值。这个对象通过内置的名字“NotImplemented”访问。
+    数值方法和丰富的比较方法（Numeric methods and rich comparison methods）
+    如果没有执行操作数的操作应该返回这个值。
+
+    查看[[https://docs.python.org/3/library/numbers.html#implementing-the-arithmetic-operations][Implementing the arithmetic operations]]获取更多细节。
+
+    (译者注：为方便、直观的解释，这里给出一个示例来说明此返回值的用途，但不做解释了: )
+    #+BEGIN_SRC python
+      class plus_a:
+
+	      def __init__(self, age):
+		      self.age = age
+
+	      def __eq__(self, other):
+		      print('other in a: {}'.format(type(other.age)))
+		      return NotImplemented
+
+
+      class plus_b:
+
+	      def __init__(self, age):
+		      self.age = age
+
+	      def __eq__(self, other):
+		      print('other in b: {}'.format(type(other.age)))
+		      return self.age == other.age
+		      # return NotImplemented
+
+      a = plus_a(3)
+      b = plus_b(3)
+
+      print(a == b) # This is True
+    #+END_SRC
+
+    /*Ellipsis*/
+
+    这个类型只有一个值。只有这个对象有这个值。这个对象通过 literal(本身？) ... 或者内置名字“Ellipsis”访问。
+    BOOLEAN  为 true。
