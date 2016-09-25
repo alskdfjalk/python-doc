@@ -6,3 +6,6 @@
 本文档目的是供本人学习 python及英语，内容是翻译 python 的官方文档，由于本人英语水平有限，所以不能完整的翻译，偶尔会出现将原句附上的情况
 
 如果有翻译不当的地方，请指正。
+
+[[https://github.com/cj4777/python-doc/blob/master/reference.org][文档正文：引言]]
+[[https://github.com/cj4777/python-doc/blob/master/data-model.org][第一部分：数据类型]]
